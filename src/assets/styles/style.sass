@@ -1,0 +1,1734 @@
+
+.body-grid
+  min-height: 100%
+  // display: grid   
+  // grid-template: minmax(9vh,auto) 1fr minmax(90px,auto) / 1fr
+  // grid-template-areas: "header" "main" "footer"
+
+main
+  grid-area: main
+  overflow: hidden
+
+// Баннер
+@function calcFluidFontSize($f-min, $f-max, $v-min, $v-max, $max)
+  $k: calc(($f-max - $f-min) / ($v-max - $v-min))
+  $b: $f-min - $k * $v-min
+  $b: $b * 1px
+  $m: $max * 1px
+  $y: calc( #{$k} * 100vw + #{$b} )
+  @return min( #{$y}, #{$m} )
+
+.banner
+  margin: auto
+  margin-top: 100px
+  height: max-content
+  // height: 90vh
+  display: grid
+  grid-template-columns: 1fr 1fr
+  position: relative
+  align-items: center
+  @media all and ($large)
+    height: 100%
+    grid-template-columns: 1fr 1fr 1fr
+  @media all and ($medium)
+    height: 80vmax
+  @media all and ($small)
+    grid-template-columns: 1fr
+    height: 80vmax
+    margin-top: 150px
+    // grid-template-rows: 1fr 1fr auto
+  @media all and ($extraSmall)
+    margin-top: 100px
+    height: 70vmax
+    grid-template-rows: 1fr 1fr auto
+
+  &__bg
+    position: absolute
+    width: 100%
+    top: 0
+    left: 0
+    z-index: -1
+    object-fit: cover
+    min-height: 100vh
+    margin: 0
+    padding: 0
+    @media all and ($medium)
+      object-position: 70%
+
+  &__face
+    // padding-top: 200px
+    position: relative
+    grid-column: 2/4
+    grid-row: 1/2
+    justify-self: end
+    max-height: 90vh
+    // &::before
+    //   content: ""
+    //   position: absolute
+    //   width: 566px
+    //   height: 566px
+    //   border-radius: 566px
+    //   background: linear-gradient(82deg, rgba(10, 10, 20, 0.85) 55.03%, rgba(11, 11, 21, 0.85) 60.07%, rgba(15, 15, 23, 0.85) 65.36%, rgba(20, 20, 27, 0.85) 70.20%, rgba(25, 25, 32, 0.85) 75.20%, rgba(32, 32, 39, 0.85) 80.24%, rgba(40, 41, 47, 0.85) 85.29%, rgba(51, 51, 58, 0.85) 90.33%, rgba(64, 64, 70, 0.85) 95.38%, rgba(79, 79, 85, 0.85) 100%, rgba(96, 96, 101, 0.85) 100%, rgba(116, 116, 120, 0.85) 100%, rgba(138, 138, 142, 0.85) 100%, rgba(163, 163, 166, 0.85) 100%, rgba(191, 191, 193, 0.85) 100%, rgba(221, 221, 223, 0.85) 100%, rgba(255, 255, 255, 0.85) 100%)
+    //   filter: blur(100px)
+    //   bottom: -154px
+    //   left: 50%
+    //   transform: translateX(-50%)
+    //   z-index: 1
+    @media all and ($small)
+      grid-column: 1/2
+      grid-row: 1/4
+      left: 130px
+    @media all and ($extraSmall)
+      padding-top: 150px
+      left: 0
+  &__face-img
+    position: relative
+  &__bg-blur
+    width: 566px
+    height: 566px
+    border-radius: 566px
+    background: linear-gradient(141deg, #D9D5D4 24.98%, rgba(247, 183, 11, 0.53) 100%)
+    filter: blur(100px)
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    z-index: -1
+    @media all and ($small)
+      width: 40vw
+  &__content
+    z-index: 2 !important
+    display: block
+    align-self: center
+    grid-column: 1/3
+    grid-row: 1/2
+    @media all and ($small)
+      grid-column: 1/2
+      grid-row: 2/3
+  &__title-wrapper
+    z-index: 1
+    position: relative
+    align-items: flex-start
+    // padding-left: 15px
+    display: flex
+    flex-direction: column
+    padding-bottom: 50px
+    @media all and ($extraSmall)
+      padding-bottom: 30px
+  &__title
+    z-index: 1
+    font: 500 calcFluidFontSize(86, 150, 320, 1170, 150)/calcFluidFontSize(47, 90, 320, 1170, 90) "Kreadon", sans-serif
+    color: #fff
+    display: inline
+    white-space: nowrap
+    margin-block-start: 0
+    margin-block-end: 0
+    position: relative
+    &::before
+      z-index: 0
+      content: "адвокат"
+      position: absolute
+      font: 400 calcFluidFontSize(31, 36, 320, 1170, 36)/calcFluidFontSize(51, 36, 320, 1170, 36) "Kreadon", sans-serif
+      color: #F7B70B
+      right: 0
+      top: -32px
+    span
+      font: 400 calcFluidFontSize(39, 68, 320, 1170, 68)/calcFluidFontSize(20, 78, 320, 1170, 78) "Kreadon", sans-serif
+  &__subtitle
+    font: 500 36px/36px 'Kreadon', sans-serif
+    color: #F7B70B
+    width: 100%
+    display: flex
+  &__text
+    display: flex
+    z-index: 1
+    font: 400 22px/30px 'Kreadon', sans-serif
+    color: #CACACA
+    @media all and ($small)
+      font: 400 18px/22px 'Kreadon', sans-serif
+      width: 70%
+      padding-bottom: 15px
+      &:last-of-type
+        padding-bottom: 0
+    @media all and ($extraSmall)
+      font: 400 14px/18px 'Kreadon', sans-serif
+      width: 100%
+      padding-bottom: 0px
+  &__button
+    padding-top: 70px
+    display: block
+    @media all and ($extraSmall)
+      padding-top: 30px
+
+// Шапка
+
+.header
+  background: linear-gradient(315deg, rgba(10, 10, 20, 0.86) 150%, rgba(10, 10, 20, 0.86) 154.42%, rgba(11, 11, 21, 0.86) 158.84%, rgba(12, 12, 22, 0.86) 163.26%, rgba(13, 13, 23, 0.86) 167.68%, rgba(15, 15, 24, 0.86) 172.1%, rgba(17, 17, 26, 0.86) 176.52%, rgba(19, 19, 28, 0.86) 180.94%, rgba(21, 21, 30, 0.86) 185.36%, rgba(23, 23, 32, 0.86) 189.77%, rgba(26, 25, 34, 0.86) 194.19%, rgba(28, 27, 36, 0.86) 198.61%, rgba(30, 30, 38, 0.86) 203.03%, rgba(33, 32, 41, 0.86) 207.45%, rgba(35, 34, 43, 0.86) 211.87%, rgba(38, 37, 46, 0.86) 216.29%, rgba(40, 39, 48, 0.86) 220.71%)
+  position: fixed
+  z-index: 9999
+  top: 0
+  width: 100%
+  &__area
+    display: grid
+    grid-template-columns: auto 3fr auto
+    gap: 30px
+    align-items: center
+    padding-top: 15px
+    padding-bottom: 15px
+    height: 9vh
+    min-height: 90px
+    @media all and ($bp)
+      grid-template-columns: repeat(3,1fr)
+    // @media all and ($extraSmall)
+    //   grid-template-columns: 0.5fr auto 0.5fr
+
+  &__logos-wrapper
+    // margin-left: -10px
+    justify-self: start
+    min-width: 250px
+    display: grid
+    gap: 10px
+    grid-template-columns: repeat(2,auto)
+    @media all and ($bp)
+      grid-column: 2/3
+    @media all and ($extraSmall)
+      grid-template-columns: 1fr
+      justify-items: center
+      min-width: 0
+      justify-self: center
+    img
+      max-width: 100%
+      @media all and ($extraSmall)
+        max-width: 60px
+
+  &__title-block
+    align-self: center
+    position: relative
+    z-index: 10
+  &__nav
+    justify-self: center
+    width: 100%
+    @media all and ($bp)
+      display: none
+
+  &__list
+    width: 100%
+    display: flex
+    flex-wrap: wrap
+    gap: 15px
+    align-items: center
+    align-content: center
+    justify-content: center
+  &__item
+    // transform: translate(0,-50px)
+    // opacity: 0.5
+  &__link
+    display: block
+    font: 400 14px/130% 'Kreadon', sans-serif
+    color: #fff
+    text-transform: uppercase
+    transition: color 0.3s ease-in-out
+    // white-space: nowrap
+    &:hover,
+    &:focus,
+    &:active
+      color: #F7B70B
+    @media all and ($large)
+      font: 400 14px/18px 'Kreadon', sans-serif
+  &__tel-wrapper
+    align-self: center
+    justify-self: end
+    // padding-left: 20px
+    // display: flex
+    // align-items: center
+    // align-content: center
+
+  &__tel
+    padding-left: 25px
+    position: relative
+    font: 600 22px/22px 'Kreadon', sans-serif
+    color: #fff
+    font-style: italic
+    text-transform: uppercase
+    transition: color 0.3s ease-in-out
+    white-space: nowrap
+
+    span
+      font-weight: 400
+    &:hover,
+    &:focus,
+    &:active
+      color: #F7B70B
+    &:hover:before,
+    &:focus:before,
+    &:active:before
+      transform: translateY(-50%) scale(1.1)
+    &::before
+      position: absolute
+      content: ""
+      width: 15px
+      height: 26px
+      background: url(../img/tel.svg)
+      left: 0
+      top: 50%
+      transform: translateY(-50%) scale(1)
+      transition: transform 0.3s ease-in-out
+      background-repeat: no-repeat
+      background-position: center
+      @media all and ($extraSmall)
+        transform: translateY(-50%) scale(0.7)
+    @media all and ($extraSmall)
+      font: 600 0.875em/110% 'Kreadon', sans-serif
+      padding-left: 20px
+      &:hover:before,
+      &:focus:before,
+      &:active:before
+        transform: translateY(-50%) scale(0.9)
+
+.burger
+  display: block
+  position: relative
+  width: 30px
+  height: 40px
+  background-color: transparent
+  border: none
+  cursor: pointer
+  @media all and ($extraSmall)
+    width: 25px
+  &__line
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
+    width: 30px
+    height: 3px
+    background-color: #F7B70B
+    @media all and ($extraSmall)
+      width: 25px
+    &:first-child
+      top: 7px
+    &:nth-child(2)
+      top: 50%
+      transform: translate(-50%, -50%)
+    &:last-child
+      bottom: 7px
+  &--active
+    z-index: 1001
+    padding-left: 50px
+    .burger__line:first-child
+      left: 25%
+      top: 50%
+      transform: rotate(45deg)
+      transform-origin: center
+      transition: transform 0.3s ease-in-out, top 0.3s ease-in-out, left 0.3s ease-in-out
+    .burger__line:nth-child(2)
+      opacity: 0
+    .burger__line:last-child
+      left: 25%
+      top: 50%
+      transform: rotate(-45deg)
+      transform-origin: center
+      transition: transform 0.3s ease-in-out, top 0.3s ease-in-out, left 0.3s ease-in-out
+
+.scroll
+  fill: rgba(92, 92, 92, 0.20)
+  backdrop-filter: blur(5px)
+  background: url(/assets/img/zerno.png)
+  box-shadow: 0px 4px 4px 0px rgba(22, 25, 36, 0.10)
+  .header__logos-wrapper
+    position: relative
+    min-width: auto
+    // &::before
+    //   content: ""
+    //   position: absolute
+    //   top: -10px
+    //   left: -5px
+    //   width: 105%
+    //   height: 82px
+    //   fill: #27262F
+    //   background: url(/assets/img/zerno.png)
+    //   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25)
+    //   transform: skew(-20deg)
+    //   border-radius: 0 0 2px 2px
+    //   @media all and ($extraSmall)
+    //     top: -18px
+  .logo
+    max-width: 100%
+    position: relative
+    max-height: 60px
+    // &::before
+    //   content: ""
+    //   position: absolute
+    //   top: 0
+    //   left: 50%
+    //   transform: translateX(-50%)
+    //   width: 250px
+    //   height: 75px
+    //   background: #27262F
+  .header__area
+    height: 60px
+    min-height: 60px
+    padding-top: 5px
+    padding-bottom: 5px
+    grid-template-columns: auto 3fr auto
+    @media all and ($bp)
+      grid-template-columns: repeat(3, 1fr)
+      gap: 20px
+  .logo, ul, .toggle-menu
+    margin: 0
+  .header__logos-wrapper
+    gap: 5px
+    min-width: 230px
+    @media all and ($bp)
+      justify-self: center
+    @media all and ($extraSmall)
+      grid-template-columns: repeat(2, auto)
+      min-width: 170px
+
+  .header__title
+    display: block
+    font: 600 1.125em/110% "Kreadon", sans-serif
+    white-space: nowrap
+    @media all and ($extraSmall)
+      font: 600 0.875em/110% "Kreadon", sans-serif
+      white-space: nowrap
+  .header__subtitle
+    display: block
+    white-space: nowrap
+    font: 400 0.72em/110% "Kreadon", sans-serif
+    @media all and ($extraSmall)
+      font: 400 0.62em/110% "Kreadon", sans-serif
+  .header__link
+    font: 500 0.875em/110% "Kreadon", sans-serif
+    color: #fff
+    &:hover,
+    &:focus,
+    &:active
+      color: #F7B70B
+  .header__tel-wrapper
+    position: relative
+    // &::before
+    //   content: ""
+    //   position: absolute
+    //   top: -30px
+    //   right: -10px
+    //   width: 120%
+    //   height: 82px
+    //   background: #27262F
+    //   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25)
+    //   transform: skew(-20deg)
+    //   border-radius: 0 0 2px 2px
+    //   @media all and ($bp)
+    //     background: none
+    //     box-shadow: none
+    //     width: 0
+    //     height: 0
+  // .header__tel
+  //   @media all and ($bp)
+  //     color: #19192B
+  .header__tel:hover, .header__tel:focus, .header__tel:active
+    color: #F7B70B
+
+  .burger
+    &__line
+      &:first-child
+        top: 10px
+      &:last-child
+        bottom: 10px
+  .burger--active .burger__line:first-child
+    top: 50%
+.navigation-mobile
+  display: none
+  @media all and ($bp)
+    position: relative
+    display: block
+
+.header__list-mobile
+  display: flex
+  flex-direction: column
+  position: fixed
+  left: -15px
+  top: -5px
+  width: 50vw
+  height: 100vh
+  z-index: 100
+  padding-left: 50px
+  padding-top: 170px
+  box-shadow: 0px 5px 40px rgb(0 0 0 / 10%)
+  background: linear-gradient(81.57deg, #0A0A14 55.03%, #0B0B15 60.07%, #0F0F17 65.36%, #14141B 70.2%, #191920 75.2%, #202027 80.24%, #28292F 85.29%, #33333A 90.33%, #404046 95.38%, #4F4F55 100.98%, #606065 105.46%, #747478 110.51%, #8A8A8E 115.55%, #A3A3A6 120.59%, #BFBFC1 125.64%, #DDDDDF 130.68%, #FFFFFF 135.72%)
+  border-radius: 0 0 3px 3px
+  gap: 15px
+  overflow-y: auto
+  visibility: hidden
+  transform: translateX(-120%)
+  transition: visibility 0.3s ease-in-out, transform 0.3s ease-in-out
+  @media all and ($extraSmall)
+    width: 100%
+  &--active
+    visibility: visible
+    transform: none
+  .header__link
+    font: 400 16px/28px "Kreadon", sans-serif
+    color: #fff
+  &:hover, &:focus, &:active
+    color: #F7B70B
+
+  // 1 экран
+
+.concept
+  margin: auto
+  position: relative
+  width: 100%
+  z-index: 1
+  &__cards-block
+    // margin: auto
+    display: grid
+    // max-width: 1170px
+    // padding-left: 25px
+    // padding-right: 25px
+    position: relative
+    top: 4vh
+    gap: 20px
+    grid-template-columns: repeat(3, 1fr)
+    // width: 100%
+    @media all and ($small)
+      grid-template-columns: 1fr
+  &__card
+    background: linear-gradient(318.51deg, rgba(0, 0, 0, 0.2) 26.56%, rgba(0, 0, 0, 0) 71.36%), #27262F
+    border-radius: 2px
+    max-width: 453px
+    @media all and ($small)
+      max-width: none
+  &__logo-wrapper
+    position: relative
+    padding: 45px 45px 20px 45px
+    display: flex
+    flex-direction: column
+    align-items: center
+    @media all and ($medium)
+      padding: 25px 25px 15px 25px
+    img
+      max-width: 100%
+      @media all and ($small)
+        max-width: 80px
+        max-height: 60px
+    &::before
+      content: ""
+      position: absolute
+      width: 50%
+      height: 1px
+      background: #F7B70B
+      bottom: 0
+      left: 50%
+      transform: translateX(-50%)
+  &__logo-title
+    font: 600 22px/28px 'Kreadon', sans-serif
+    color: #fff
+    text-align: center
+    padding-top: 20px
+    @media all and ($medium)
+      font: 600 18px/24px "Kreadon", sans-serif
+  &__text-wrapper
+    padding: 20px 45px 45px 45px
+    @media all and ($medium)
+      padding: 15px 25px 25px 25px
+    p
+      text-align: center
+  &__area
+    // margin: auto
+    // display: grid
+    // max-width: 1170px
+    // padding-left: 25px
+    // padding-right: 25px
+    padding-top: 100px
+    // padding-bottom: 100px
+    margin-top: 4vh
+  &__content-block
+    padding-top: 80px
+    padding-bottom: 20px
+    // display: grid
+    // grid-template-columns: repeat(2,1fr)
+    // grid-template-rows: 4fr
+    // gap: 20px
+  &__content-list
+    display: grid
+    grid-template-columns: repeat(3,1fr)
+    grid-template-rows: 4fr
+    gap: 30px 40px
+    margin-block-start: 0
+    margin-block-end: 0
+    padding-inline-start: 0
+    @media all and ($medium)
+      grid-template-columns: repeat(2,1fr)
+      grid-template-rows: repeat(3,1fr)
+    @media all and ($small)
+      .concept__content-item--1
+        grid-column: 1/2
+        grid-row: 1/2
+      .concept__content-item--2
+        grid-column: 2/3
+        grid-row: 1/2
+      .concept__img-wrapper
+        grid-column: 1/3
+        grid-row: 2/3
+        justify-self: center
+        width: 75%
+      .concept__content-item--3
+        grid-column: 1/2
+        grid-row: 3/4
+      .concept__content-item--4
+        grid-column: 2/3
+        grid-row: 3/4
+    @media all and ($extraSmall)
+      grid-template-columns: 1fr
+      .concept__content-item--1
+        grid-column: 1/2
+        grid-row: 1/2
+      .concept__content-item--2
+        grid-column: 1/2
+        grid-row: 2/3
+      .concept__img-wrapper
+        grid-column: 1/2
+        grid-row: 3/4
+      .concept__content-item--3
+        grid-column: 1/2
+        grid-row: 4/5
+      .concept__content-item--4
+        grid-column: 1/2
+        grid-row: 5/6
+
+  &__img-wrapper
+    display: grid
+    grid-column: 2/3
+    grid-row: 1/3
+    align-self: center
+    background-image: url(/assets/img/concept.jpg)
+    width: 100%
+    height: 100%
+    max-height: 293px
+    background-position: center
+    background-repeat: no-repeat
+    background-size: cover
+    box-shadow: inset 17px -17px 0px rgba(25, 25, 43, 0.44)
+    filter: drop-shadow(17px -17px 0px rgba(247, 183, 11, 0.1))
+    border-radius: 2px
+  &__content-title
+    font: 600 20px/30px "Kreadon", sans-serif
+    font-style: italic
+    text-transform: uppercase
+    color: #fff
+    @media all and ($small)
+      font: 600 16px/22px "Kreadon", sans-serif
+  &__content-item
+    padding-left: 45px
+    position: relative
+    // padding-bottom: 35px
+    &::before
+      z-index: -1
+      content: ""
+      position: absolute
+      font: 800 135px/176px 'Kreadon', sans-serif
+      font-style: italic
+      color: rgba(247, 183, 11, 0.4)
+      left: 0
+      top: -50px
+    &--1::before
+      content: "1"
+    &--2::before
+      content: "2"
+    &--3::before
+      content: "3"
+    &--4::before
+      content: "4"
+  &__button-wrapper
+    padding-left: 8vw
+  &__button
+    padding-left: 0
+    padding-right: 0
+    width: 30vw
+
+.about
+  padding: 50px 0
+  // top: -100px
+  position: relative
+  // background: linear-gradient(274.81deg, #33333A 51.63%, #686B74 97.83%)
+  width: 100%
+  &__grid
+    padding: 2em 0
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    grid-template-rows: 1fr
+    justify-items: stretch
+    align-items: start
+    gap: 40px
+    position: relative
+    &:before
+      content: ""
+      position: absolute
+      width: 50%
+      height: 1px
+      background: #F7B70B
+      bottom: 11px
+      left: 50%
+      transform: translateX(-50%)
+  @media all and ($bp)
+    gap: 20px
+    .about__name
+      grid-column: 1/3
+      grid-row: 1/2
+      justify-self: center
+    .about__img-wrapper
+      grid-column: 1/3
+      grid-row: 2/3
+      min-height: 350px
+      justify-self: center
+      max-width: 75%
+    .about__text-italic-wrapper
+      grid-column: 1/3
+      grid-row: 3/4
+    .about__grid2
+      grid-column: 1/3
+      grid-row: 4/5
+      min-height: 0
+    .subtitle
+      text-align: center
+    .about__content-subtitle
+      text-align: center
+
+  &__text-content
+    padding: 2em 0
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    grid-template-rows: 1fr
+    align-items: stretch
+    gap: 20px 40px
+    justify-items: stretch
+    @media all and ($small)
+      grid-template-columns: 1fr
+      gap: 20px
+      .g-1-2
+        grid-column: 1/2
+      .g-1
+        grid-column: 1/2
+        justify-self: start
+        margin-right: 20px
+      .g-2
+        grid-column: 1/2
+        justify-self: start
+        margin-right: 20px
+      .g-3
+        grid-column: 1/2
+      .about__card-text
+        margin-top: 25px
+
+  &__text-title
+    font: 400 20px/23px "Kreadon", sans-serif
+    text-transform: uppercase
+    color: #F7B70B
+    text-align: center
+  &__card-text
+    margin-top: 35px
+    padding: 20px 20px 35px 40px
+    background: #5B5B5B
+    box-shadow: 17px -17px 0px rgba(247, 183, 11, 0.1), inset 17px -17px 0px rgba(25, 25, 43, 0.44)
+    border-radius: 3px
+  &__img-block
+    position: relative
+    right: 0
+    top: 0
+    height: 100%
+    object-fit: cover
+
+  &__img-wrapper
+    display: flex
+    align-self: center
+    justify-self: center
+    background-image: url(/assets/img/about-f.jpg)
+    width: 100%
+    height: 100%
+    background-position: top
+    background-repeat: no-repeat
+    background-size: cover
+    box-shadow: inset 17px -17px 0px rgba(25, 25, 43, 0.44)
+    filter: drop-shadow(17px -17px 0px rgba(247, 183, 11, 0.1))
+    border-radius: 2px
+    grid-column: 2/3
+    grid-row: 1/3
+    img
+      height: 100%
+      object-fit: cover
+  &__text-italic-wrapper
+    grid-column: 2/3
+  &__name
+    grid-column: 1/2
+    grid-row: 1/2
+  &__grid2
+    grid-column: 1/2
+    grid-row: 2/4
+    min-height: 563px
+    display: grid
+    align-items: center
+  &__area
+    position: relative
+  &__subtitle-wrapper
+    grid-column: 1/4
+  &__content-block
+    h3
+      margin-block-end: 0
+  &__content-subtitle
+    font: 400 20px/23px 'Kreadon', sans-serif
+    color: #D9D9D9
+    text-transform: uppercase
+    padding-top: 8px
+    @media all and ($small)
+      font: 700 18px/22px 'Kreadon', sans-serif
+  // &__content-list
+  //   padding-top: 25px
+  &__content-item
+    padding: 5px 0 5px 25px
+    position: relative
+    &::before
+      content: ""
+      position: absolute
+      left: 0
+      top: 12px
+      width: 14px
+      height: 14px
+      background: #F7B70B
+      border-radius: 50px
+  &__button-wrapper
+    margin-top: 35px
+    display: flex
+    align-items: center
+    justify-content: center
+    padding: 25px 0
+  &__grid4
+    grid-column: 1/4
+
+  &__text-italic
+    margin-top: 30px
+    position: relative
+    z-index: 1
+    font: 300 16px/22px 'Kreadon', sans-serif
+    font-style: italic
+    color: #fff
+    padding-left: 42px
+    &::before
+      content: url(/assets/img/kov-min.svg)
+      position: absolute
+      left: 0
+      top: -26px
+      z-index: -1
+
+.probono
+  padding-bottom: 17px
+  position: relative
+  // background: linear-gradient(96.74deg, #0A0A14 31.99%, #AAAAB1 42.15%, #FFFFFF 50.59%)
+  // width: 100%
+  // @media all and ($medium)
+  //   background: linear-gradient(177deg, #0A0A14 22.99%, #AAAAB1 31.15%, #FFFFFF 50.59%)
+  // @media all and ($extraSmall)
+  //   background: linear-gradient(177deg, #0A0A14 6.99%, #AAAAB1 20.15%, #FFFFFF 50.59%)
+  &__grid-wrapper
+    margin: auto
+    position: relative
+  &__grid
+    // padding: 2em 0
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    grid-template-rows: 1fr
+    justify-items: stretch
+    align-items: start
+    gap: 0 60px
+    position: relative
+    @media all and ($medium)
+      grid-template-columns: 1fr
+  &__bg
+    pointer-events: none
+    position: absolute
+    bottom: 0
+    right: 0
+    z-index: -1
+  &__title-wrapper
+    margin-top: 50px
+    grid-column: 1/2
+    grid-row: 1/2
+
+  &__img-block
+    margin-top: 17px
+    grid-column: 1/2
+    grid-row: 1/3
+
+  &__img-wrapper
+    display: flex
+    align-self: start
+    justify-self: start
+    background-image: url(/assets/img/probono-bg.jpg)
+    width: 100%
+    height: 100%
+    background-position: center
+    background-repeat: no-repeat
+    background-size: cover
+    box-shadow: inset 17px -17px 0px rgb(25 25 43 / 44%)
+    filter: drop-shadow(17px -17px 0px rgba(247, 183, 11, 0.1))
+    border-radius: 2px
+    @media all and ($medium)
+      min-height: 410px
+      background-position: 50% 42%
+    @media all and ($small)
+      min-height: 350px
+    @media all and ($extraSmall)
+      min-height: 250px
+
+  &__area-block
+    display: flex
+    align-items: flex-start
+    justify-content: space-between
+  &__area
+    padding: 20px 0
+    margin-top: 50px
+    grid-column: 2/3
+    display: grid
+    @media all and ($medium)
+      grid-column: 1/2
+      margin-top: 0
+    .subtitle
+      margin-block-end: 0
+      @media all and ($medium)
+        color: #fff
+        text-align: center
+        padding: 20px
+        background-color: rgba(247, 183, 11, 0.1)
+
+  &__subtitle-wrapper
+    padding-bottom: 30px
+    @media all and ($medium)
+      padding-bottom: 0
+      margin-top: -215px
+    @media all and ($small)
+      margin-top: -172px
+    @media all and ($extraSmall)
+      margin-top: -143px
+
+    &::before
+      content: ""
+      position: absolute
+      width: 50%
+      height: 1px
+      background: #F7B70B
+      bottom: 0
+      left: 50%
+      transform: translateX(-50%)
+      @media all and ($medium)
+        opacity: 0
+
+  &__card-text
+    margin-top: 35px
+    padding: 15px
+    background: linear-gradient(318.51deg, rgba(0, 0, 0, 0.2) 26.56%, rgba(0, 0, 0, 0) 71.36%), #27262F
+    border-radius: 2px
+
+  &__card-text-wrapper
+    border: 2px solid rgba(247, 183, 11, 0.4)
+    border-radius: 2px
+    padding: 15px
+  &__content-block
+    // padding: 50px 0
+    h3
+      margin-block-end: 0
+  &__content-subtitle
+    font: 400 20px/23px 'Kreadon', sans-serif
+    color: #D9D9D9
+    text-transform: uppercase
+    padding-top: 8px
+  &__content-list
+    // padding: 25px 30px
+    text-align: start
+  &__content-item
+    padding: 5px 0 5px 25px
+    position: relative
+    &::before
+      content: ""
+      position: absolute
+      left: 0
+      top: 12px
+      width: 14px
+      height: 14px
+      background: #F7B70B
+      border-radius: 50px
+  &__text-wrapper
+    padding-top: 25px
+    &--end
+      padding-left: 0
+      padding-top: 30px
+  &__button
+    display: flex
+    justify-content: center
+
+.help
+  // background: linear-gradient(81.57deg, #0A0A14 55.03%, #0B0B15 60.07%, #0F0F17 65.36%, #14141B 70.2%, #191920 75.2%, #202027 80.24%, #28292F 85.29%, #33333A 90.33%, #404046 95.38%, #4F4F55 100.98%, #606065 105.46%, #747478 110.51%, #8A8A8E 115.55%, #A3A3A6 120.59%, #BFBFC1 125.64%, #DDDDDF 130.68%, #FFFFFF 135.72%)
+  padding: 100px 0
+  position: relative
+  @media all and ($small)
+    padding-top: 25px
+    padding-bottom: 60px
+  // &__line
+  //   position: absolute
+  //   opacity: 0.8
+  //   top: -130px
+  //   object-fit: cover
+  //   width: 100%
+  //   transform: rotate(180deg)
+  //   pointer-events: none
+  &__area
+    // margin: auto
+    // display: grid
+    // max-width: 1170px
+    // padding-left: 25px
+    // padding-right: 25px
+    position: relative
+    min-height: 630px
+  &__block
+    padding: 2em 0
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    grid-template-rows: 1fr
+    justify-items: stretch
+    align-items: start
+    gap: 40px
+    position: relative
+    @media all and ($bp)
+      grid-template-columns: 1fr
+      gap: 20px
+
+  &__left
+    grid-column: 1/2
+    grid-row: 1/2
+    position: relative
+    // padding: 0 50px 0 80px
+
+  &__left-card-wrapper
+    // width: fit-content
+    // border: 5px solid #F7B70B
+    // border-radius: 2px
+    // box-shadow: inset 17px -17px 0px rgb(25 25 43 / 44%)
+    // filter: drop-shadow(17px -17px 0px rgba(247, 183, 11, 0.1))
+    // border-radius: 2px
+    // position: relative
+    // z-index: 2
+    // img
+    //   width: 100%
+    //   position: relative
+    //   z-index: -2
+  &__left-card
+    margin-top: 15px
+    display: flex
+    align-self: center
+    justify-self: center
+    background-image: url(/assets/img/help1.jpg)
+    max-width: 565px
+    min-height: 301px
+    min-width: 300px
+    background-position: top
+    background-repeat: no-repeat
+    background-size: cover
+    box-shadow: inset 17px -17px 0px rgb(25 25 43 / 44%)
+    filter: drop-shadow(17px -17px 0px rgba(247, 183, 11, 0.1))
+    border-radius: 2px
+    @media all and ($bp)
+      max-width: none
+      min-height: 250px
+      background-position: center
+      margin-right: 20px
+    @media all and ($small)
+      min-height: 200px
+
+  &__left-title-wrapper
+    padding: 20px 5px
+    text-align: center
+  &__left-title
+    font: 400 20px/26px 'Kreadon', sans-serif
+    color: #F7B70B
+    text-transform: uppercase
+  &__left-desc-wrapper
+    grid-column: 1/3
+    // padding-top: 50px
+    // padding-left: 80px
+    text-align: justify
+    @media all and ($bp)
+      grid-column: 1/2
+  &__left-desc
+    position: relative
+    z-index: 1
+    font: 300 16px/22px "Kreadon", sans-serif
+    font-style: italic
+    color: #fff
+
+  &__right
+    grid-column: 2/3
+    // padding: 80px
+    @media all and ($bp)
+      grid-column: 1/2
+      grid-row: 3/4
+  &__right-content-wrapper
+
+    // border: 1px solid rgba(247, 183, 11, 0.4)
+    // border-radius: 2px
+    // padding: 50px
+    width: 100%
+  &__right-title-wrapper
+    position: absolute
+    padding: 10px
+    text-align: center
+    z-index: 2
+    top: 50%
+    left: 50%
+    transform: translate(-50%,-50%)
+    background: rgba(247, 183, 11, 0.66)
+    border-radius: 2px
+  &__right-title
+    display: inline
+    color: #fff
+  &__right-list
+    width: 100%
+    // background: rgba(8, 7, 36, 0.4)
+    padding: 20px 0
+    @media all and ($bp)
+      padding: 0
+  &__right-text
+    font: 400 20px/26px 'Kreadon', sans-serif
+    color: #fff
+    padding-bottom: 15px
+  &__right-item
+    position: relative
+    padding-left: 60px
+    padding-right: 30px
+    @media all and ($bp)
+      padding-left: 30px
+    &::before
+      content: ""
+      position: absolute
+      left: 30px
+      top: 6px
+      width: 14px
+      height: 14px
+      background: #F7B70B
+      border-radius: 50px
+      @media all and ($bp)
+        left: 0
+
+  &__swiper-card-wrapper
+    cursor: pointer
+    width: fit-content
+    position: relative
+    // border-radius: 2px
+    &::before
+      position: absolute
+      content: ""
+      width: 5px
+      height: 72%
+      background: #F7B70B
+      bottom: 4px
+      left: 0
+      z-index: 3
+    &:active
+      outline: 1px solid #F7B70B
+      border-radius: 2px
+    &:hover
+      border: 1px solid #F7B70B
+    img
+      width: 100%
+      // max-width: 180px
+  &__swiper-card
+    position: relative
+  &__swiper-title-wrapper
+    position: absolute
+    min-height: 53px
+    text-align: center
+    // padding: 0 3px
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 100%
+    top: 50%
+    left: 50%
+    transform: translate(-50%,-50%)
+    background: rgba(10, 10, 20, 0.69)
+    // border-radius: 2px
+    z-index: 0
+  &__swiper-title
+    font: 500 15px/18px 'Kreadon', sans-serif
+    color: #fff
+    text-transform: uppercase
+    z-index: 2
+    padding: 0 5px
+  &__swiper-desc-wrapper
+    padding-top: 50px
+    // padding-left: 80px
+    text-align: justify
+
+  &__swiper
+    margin: auto
+    max-width: calc(100% - 150px)
+    padding-left: 25px
+    padding-right: 25px
+    position: relative
+
+    .swiper-help
+      margin: 0 auto
+    // .swiper-slide
+    //   max-width: 180px
+    .swiper-button-prev:after
+      position: absolute
+      content: url(/assets/img/swiper-prev.svg)
+      left: 0
+      top: 50%
+      transform: translateY(-50%)
+      width: 100%
+      height: 100%
+    .swiper-button-next:after
+      position: absolute
+      content: url(/assets/img/swiper-next.svg)
+      right: 0
+      width: 100%
+      height: 100%
+      top: 50%
+      transform: translateY(-50%)
+    .swiper-button-prev,
+    .swiper-button-next
+      margin-top: 0
+      --swiper-navigation-size: 108px
+      transform: translateY(-50%)
+      z-index: 10
+    .swiper-button-prev
+      left: -40px
+    .swiper-button-next
+      right: -60px
+    .swiper-pagination
+      bottom: -30px
+    .swiper-pagination-bullet
+      width: 10px
+      height: 10px
+      border-radius: 3px
+      background: #fff
+    .swiper-pagination-bullet-active
+      background: #F7B70B
+      width: 10px
+      height: 10px
+      border-radius: 2px
+
+.price-corp
+  margin: auto
+  position: relative
+  width: 100%
+  &__text-wrapper
+    padding: 40px 45px 45px 45px
+    p
+      text-align: center
+  &__title span
+    font: 300 20px/30px "Kreadon", sans-serif
+    font-style: italic
+    @media all and ($small)
+      font: 300 16px/22px "Kreadon", sans-serif
+  &__area
+    padding-top: 40px
+    padding-bottom: 40px
+  &__content-block
+    padding-top: 40px
+    padding-bottom: 20px
+    .price__table-title
+      font-size: 32px
+      line-height: 40px
+      @media all and ($small)
+        font-size: 28px
+        line-height: 30px
+      @media all and ($extraSmall)
+        font-size: 20px
+        line-height: 22px
+
+  &__content-list
+    // padding: 40px 0
+    padding-bottom: 40px
+    display: grid
+    grid-template-columns: repeat(4,1fr)
+    grid-template-rows: 4fr
+    gap: 30px
+    margin-block-start: 0
+    margin-block-end: 0
+    padding-inline-start: 0
+    @media all and ($medium)
+      grid-template-columns: repeat(2,1fr)
+    @media all and ($extraSmall)
+      grid-template-columns: 1fr
+      padding-bottom: 20px
+
+  &__content-title
+    font: 600 20px/30px "Kreadon", sans-serif
+    font-style: italic
+    text-transform: uppercase
+    color: #fff
+  &__content-item
+    padding: 15px
+    position: relative
+    background: linear-gradient(318.51deg, rgba(0, 0, 0, 0.2) 26.56%, rgba(0, 0, 0, 0) 71.36%), #27262F
+    border-radius: 2px
+    &:hover .price-corp__card-top,
+    &:focus .price-corp__card-top,
+    &:active .price-corp__card-top
+      background: rgba(247, 183, 11, 0.66)
+    &:hover .price-corp__card,
+    &:focus .price-corp__card,
+    &:active .price-corp__card
+      border: 2px solid #F7B70B
+    &:hover .price-corp__card-price,
+    &:active .price-corp__card-price,
+    &:focus .price-corp__card-price
+      color: #fff
+    &:hover .price-corp__card-price span::after,
+    &:active .price-corp__card-price span::after,
+    &:focus .price-corp__card-price span::after
+      color: #fff
+    &:hover .price-corp__card-title::before,
+    &:active .price-corp__card-title::before,
+    &:focus .price-corp__card-title::before
+      background: #fff
+
+  &__card
+    height: 100%
+    border: 2px solid rgba(247, 183, 11, 0.4)
+    border-radius: 2px
+    transition: border 0.3s ease-in-out
+  &__card-top
+    padding: 20px 15px
+    background: rgba(144, 144, 147, 0.92)
+    clip-path: polygon(0% 15%, 100% 0%, 100% 85%, 0% 100%)
+    transition: background 0.3s ease-in-out
+  &__card-title
+    font: 500 18px/20px "Kreadon", sans-serif
+    color: #fff
+    text-align: center
+    position: relative
+    padding-bottom: 10px
+    &::before
+      content: ""
+      position: absolute
+      width: 50%
+      height: 2px
+      background: rgba(247, 183, 11, 0.4)
+      bottom: 0
+      left: 50%
+      transform: translateX(-50%)
+      transition: background 0.3s ease-in-out
+  &__card-price
+    font: 600 32px/32px "Kreadon", sans-serif
+    color: #F7B70B
+    text-align: center
+    position: relative
+    padding-top: 10px
+    transition: color 0.3s ease-in-out
+    span
+      font: 400 32px/32px "Kreadon", sans-serif
+      position: relative
+      &::after
+        position: absolute
+        content: "₽"
+        font: 400 18px/18px "Kreadon", sans-serif
+        color: #F7B70B
+        top: 6px
+        right: -14px
+        transition: color 0.3s ease-in-out
+  &__card-list
+    padding: 15px 15px 15px 35px
+  &__card-item
+    padding-bottom: 10px
+    position: relative
+    &::before
+      content: ""
+      position: absolute
+      left: -18px
+      top: 6px
+      width: 10px
+      height: 10px
+      background: #F7B70B
+      border-radius: 50px
+    &:last-child
+      padding-bottom: 0
+  &__card-text
+    line-height: 20px
+  &__desc-block
+    display: grid
+    grid-template-columns: repeat( 2, 1fr)
+    align-items: center
+    justify-items: center
+    gap: 40px
+    @media all and ($medium)
+      grid-template-columns: 1fr
+      gap: 20px
+  &__desc-title
+    padding-top: 5px
+    padding-bottom: 10px
+  &__desc-wrapper
+    padding-left: 100px
+    position: relative
+    @media all and ($extraSmall)
+      padding-left: 0
+      padding-top: 90px
+    &::before
+      position: absolute
+      left: 0
+      content: url(/assets/img/attention.svg)
+      @media all and ($extraSmall)
+        left: 50%
+        top: 0
+        transform: translateX(-50%)
+  &__desc-text
+    color: #cacaca
+  &__button
+    padding: 20px 0
+    @media all and ($medium)
+      text-align: center
+.price-person
+  margin-top: 40px
+  width: 100%
+  background: rgba(54, 54, 54, 0.87)
+  border-radius: 4px
+  -webkit-border-vertical-spacing: 0
+  -webkit-border-horizontal-spacing: 1px
+  &__button
+    display: flex
+    align-items: center
+    justify-content: center
+  thead
+    border-top-left-radius: 4px
+    border-top-right-radius: 4px
+    border-radius: 4px
+    padding: 20px
+    th
+      background: rgba(247, 183, 11, 0.66)
+      padding: 20px 10px
+      border-width: 1px 0px 0px 1px
+      border-style: solid
+      border-color: #5B5B5B
+      font: 600 18px/130% "Kreadon", sans-serif
+      text-transform: uppercase
+      color: #fff
+      @media all and ($small)
+        font: 600 13px/130% "Kreadon", sans-serif
+
+      &:first-child
+        border-top-left-radius: 4px
+        width: 75%
+        text-align: start
+      &:last-child
+        border-top-right-radius: 4px
+
+  tbody
+    td
+      border-width: 0px 0px 2px 2px
+      border-style: solid
+      border-color: #5B5B5B
+      padding: 20px
+      @media all and ($small)
+        padding: 10px
+      &:last-child
+        border-width: 0px 2px 2px 2px
+        font: 600 18px/130% "Kreadon", sans-serif
+        color: #fff
+        text-align: center
+        // text-transform: uppercase
+        @media all and ($small)
+          font: 600 14px/130% "Kreadon", sans-serif
+    tr:last-child
+      td:first-child
+        border-bottom-left-radius: 4px
+      td:last-child
+        border-bottom-right-radius: 4px
+
+.contact
+  // background-image: url(/assets/img/contact-banner.jpg)
+  // background-position: top
+  // background-repeat: no-repeat
+  // background-size: cover
+  // position: relative
+
+  &__bg
+    background: linear-gradient(274.81deg, rgba(51, 51, 58, 0.84) 51.63%, rgba(104, 107, 116, 0.84) 97.83%)
+    height: 100%
+  &__block
+    // margin: auto
+    // display: grid
+    // max-width: 1170px
+    // padding-left: 25px
+    // padding-right: 25px
+    padding-top: 40px
+    padding-bottom: 40px
+  &__grid
+    display: grid
+    grid-template-columns: repeat(3,1fr)
+    grid-template-rows: 0.2fr 1fr 0.2fr
+    gap: 0
+    max-height: 500px
+    @media all and ($bp)
+      grid-template-columns: repeat(2,1fr)
+      grid-template-rows: auto
+      gap: 20px
+      max-height: none
+    @media all and ($small)
+      grid-template-columns: 1fr
+  &__map-area
+    grid-column: 1/3
+    grid-row: 1/4
+    @media all and ($bp)
+      grid-column: 1/3
+      grid-row: 2/3
+    @media all and ($small)
+      display: none
+    &--mobile
+      display: none
+      @media all and ($small)
+        display: block
+        .map
+          height: 200px
+          overflow: hidden
+  &__wrapper
+    margin-left: 25px
+    padding: 15px
+    position: relative
+    background: linear-gradient(318.51deg, rgba(0, 0, 0, 0.2) 26.56%, rgba(0, 0, 0, 0) 71.36%), #27262F
+    border-radius: 2px
+    z-index: 99
+    grid-column: 1/2
+    grid-row: 2/3
+    @media all and ($bp)
+      grid-column: 1/3
+      grid-row: 1/2
+      margin-left: 0
+    @media all and ($small)
+      grid-column: 1/2
+      grid-row: 1/2
+
+  &__reviews
+    position: relative
+    // max-width: 30%
+    z-index: 99
+    grid-column: 3/4
+    grid-row: 1/4
+    @media all and ($bp)
+      grid-column: 1/2
+      grid-row: 2/3
+    @media all and ($small)
+      grid-column: 1/2
+      grid-row: 2/3
+      // .yand-content div
+      //   max-height: 400px
+  &__card
+    height: 100%
+    border: 2px solid rgba(247, 183, 11, 0.4)
+    border-radius: 2px
+    box-sizing: border-box
+  &__card-title-wrapper
+    display: flex
+    justify-content: center
+  &__card-title
+    font: 500 18px/20px "Kreadon", sans-serif
+    color: #fff
+    text-align: center
+    position: relative
+    padding-bottom: 10px
+    padding-top: 20px
+    text-transform: uppercase
+    width: fit-content
+    &::before
+      content: ""
+      position: absolute
+      width: 50%
+      height: 2px
+      background: rgba(247, 183, 11, 0.4)
+      bottom: 0
+      left: 50%
+      transform: translateX(-50%)
+  &__card-list
+    padding-top: 20px
+  &__card-item
+    padding-left: 50px
+    padding-bottom: 10px
+    padding-right: 10px
+  &__card-link
+    line-height: 22px
+    position: relative
+    transition: color 0.3s ease-in-out
+    &:hover,
+    &:active,
+    &:focus
+      color: #F7B70B
+
+    &--tel::before
+      content: ""
+      background-image: url(/assets/img/cont-tel.svg)
+      background-position: center
+      background-repeat: no-repeat
+      background-size: contain
+      width: 20px
+      height: 20px
+      position: absolute
+      left: -30px
+    &--mail::before
+      content: ""
+      background-image: url(/assets/img/mail.svg)
+      background-position: center
+      background-repeat: no-repeat
+      background-size: contain
+      width: 20px
+      height: 20px
+      position: absolute
+      left: -30px
+    &--map
+      cursor: auto
+      &:active, &:focus, &:hover
+        color: #fff
+      &::before
+        content: ""
+        background-image: url(/assets/img/map.svg)
+        background-position: center
+        background-repeat: no-repeat
+        background-size: contain
+        width: 20px
+        height: 20px
+        position: absolute
+        left: -30px
+  &__social
+    padding: 10px
+    background: rgba(144, 144, 147, 0.92)
+    clip-path: polygon(0% 15%, 100% 0%, 100% 85%, 0% 100%)
+    @media all and ($small)
+      margin-top: 10px
+  &__social-list
+    display: grid
+    grid-template-columns: repeat(4,1fr)
+    gap: 15px
+    justify-items: center
+    align-items: center
+  &__social-item
+    // padding: 5px
+  &__social-link
+    position: relative
+    display: flex
+    padding: 5px
+    transition: background 0.3s ease-in-out, border 0.3s ease-in-out
+
+  &__social-img path
+    transition: fill 0.3s ease-in-out
+  &__social-link:hover .contact__social-img path,
+  &__social-link:active .contact__social-img path,
+  &__social-link:focus .contact__social-img path
+    fill: #F7B70B
+  &__social-link:hover,
+  &__social-link:active,
+  &__social-link:focus
+    background: #D9D9D9
+    border-radius: 3px
+
+.map
+  width: 100%
+  height: 500px
+
+.footer
+  background: linear-gradient(315deg, #0A0A14 150%, #0A0A14 154.42%, #0B0B15 158.84%, #0C0C16 163.26%, #0D0D17 167.68%, #0F0F18 172.1%, #11111A 176.52%, #13131C 180.94%, #15151E 185.36%, #171720 189.77%, #1A1922 194.19%, #1C1B24 198.61%, #1E1E26 203.03%, #212029 207.45%, #23222B 211.87%, #26252E 216.29%, #282730 220.71%)
+  &__grid
+    padding-top: 40px
+    padding-bottom: 40px
+    grid-template-columns: repeat(3, 1fr)
+    @media all and ($small)
+      grid-template-columns: 1fr
+      justify-items: center
+      gap: 20px
+  &__title-block
+    grid-column: 1/2
+    grid-row: 1/2
+    position: relative
+    justify-self: start
+    align-self: start
+    @media all and ($small)
+      grid-column: 1/2
+      grid-row: 2/3
+      justify-self: center
+      align-self: center
+  &__info-block
+    grid-column: 1/2
+    grid-row: 2/3
+    @media all and ($small)
+      grid-column: 1/2
+      grid-row: 4/5
+  &__logo-block
+    grid-column: 2/3
+    grid-row: 1/3
+    justify-self: center
+    align-self: center
+    @media all and ($small)
+      grid-column: 1/2
+      grid-row: 1/2
+  &__contacts
+    grid-column: 3/4
+    grid-row: 1/3
+    @media all and ($small)
+      grid-column: 1/2
+      grid-row: 3/4
+      display: flex
+      flex-wrap: wrap
+      // grid-template-columns: repeat(2,1fr)
+      // .contact__card-item:nth-child(1),
+      // .contact__card-item:nth-child(2)
+      //   grid-column: 1/2
+      // .contact__card-item:nth-child(3),
+      // .contact__card-item:nth-child(4)
+      //   grid-column: 2/3
+
+  &__logo-link
+    display: block
+    width: 100%
+    height: 100%
+    &:hover .footer__logo,
+    &:active .footer__logo,
+    &:focus .footer__logo
+      mix-blend-mode: normal
+
+  &__logo
+    mix-blend-mode: luminosity
+    transition: all 0.3s ease-in-out
+  &__title
+    font: 600 26px/26px "Kreadon", sans-serif
+    // letter-spacing: 0.14em
+    text-transform: uppercase
+    color: #FFFFFF
+    @media all and ($large)
+      font: 600 20px/22px "Kreadon", sans-serif
+    @media all and ($extraSmall)
+      font: 600 0.95em/110% "Kreadon", sans-serif
+      white-space: nowrap
+  &__subtitle
+    font: 400 17px/19px "Kreadon", sans-serif
+    text-transform: uppercase
+    color: #FFFFFF
+    white-space: nowrap
+    @media all and ($large)
+      font: 400 13px/15px "Kreadon", sans-serif
+    @media all and ($extraSmall)
+      font: 400 0.62em/110% "Kreadon", sans-serif
+  &__title-block
+    &::before
+      content: ""
+      position: absolute
+      width: 50%
+      height: 1px
+      background: #F7B70B
+      bottom: -15px
+      left: 50%
+      transform: translateX(-50%)
+  &__info
+    font: 400 16px/19px "Kreadon", sans-serif
+    color: #FFFFFF
+    span
+      font-weight: 700
+  &__bottom
+    background: #fff
+    padding-top: 10px
+    padding-bottom: 10px
